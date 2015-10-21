@@ -1,17 +1,12 @@
-
-import java.io.IOException;
-
 import net.beadsproject.beads.core.AudioContext;
 import net.beadsproject.beads.core.Bead;
 import net.beadsproject.beads.data.Buffer;
 import net.beadsproject.beads.data.Sample;
 import net.beadsproject.beads.data.audiofile.AudioFileType;
 import net.beadsproject.beads.events.KillTrigger;
-import net.beadsproject.beads.ugens.Clock;
-import net.beadsproject.beads.ugens.Envelope;
-import net.beadsproject.beads.ugens.Gain;
-import net.beadsproject.beads.ugens.RecordToSample;
-import net.beadsproject.beads.ugens.WavePlayer;
+import net.beadsproject.beads.ugens.*;
+
+import java.io.IOException;
 
 /**
  * This lesson shows how to use the RecordToSample class so that instead of
