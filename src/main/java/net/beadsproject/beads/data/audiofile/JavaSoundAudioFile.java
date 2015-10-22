@@ -1,8 +1,7 @@
-package net.beadsproject.beads.beads.data.audiofile;
+package net.beadsproject.beads.data.audiofile;
 
 import net.beadsproject.beads.core.AudioUtils;
 import net.beadsproject.beads.data.SampleAudioFormat;
-import net.beadsproject.beads.data.audiofile.*;
 
 import javax.sound.sampled.*;
 import java.io.ByteArrayInputStream;
@@ -121,7 +120,7 @@ public class JavaSoundAudioFile implements AudioFileReader, AudioFileWriter {
       prepareForReading();
       readEntireFile();
     } catch (Exception e) {
-      throw new IOException("Could not read audio file: " + this.name);
+      throw new IOException("Could not read audio file: " + this.name, e);
     }
     this.close();
     return sampleData;
@@ -151,7 +150,7 @@ public class JavaSoundAudioFile implements AudioFileReader, AudioFileWriter {
     try {
       encodedStream = getStream();
     } catch (UnsupportedAudioFileException e) {
-      throw (new IOException(e.getMessage())); // converts UnsupportedAudioFileException, which is JavaSound specific, to more generic IOException.
+      throw new IOException(e.getMessage(), e); // converts UnsupportedAudioFileException, which is JavaSound specific, to more generic IOException.
     }
     encodedFormat = encodedStream.getFormat();
 

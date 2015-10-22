@@ -1,4 +1,4 @@
-package net.beadsproject.beads.beads.ugens;
+package net.beadsproject.beads.ugens;
 
 /*
  * This file is part of Beads. See http://www.beadsproject.net for all information.

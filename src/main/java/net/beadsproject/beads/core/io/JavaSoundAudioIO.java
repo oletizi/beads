@@ -1,4 +1,4 @@
-package net.beadsproject.beads.beads.core.io;
+package net.beadsproject.beads.core.io;
 
 import net.beadsproject.beads.core.*;
 

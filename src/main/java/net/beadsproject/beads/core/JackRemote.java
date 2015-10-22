@@ -1,4 +1,4 @@
-package net.beadsproject.beads.beads.core;
+package net.beadsproject.beads.core;
 
 import java.io.IOException;
 

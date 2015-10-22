@@ -3,10 +3,7 @@
  */
 package net.beadsproject.beads.data;
 
-import net.beadsproject.beads.data.audiofile.AudioFileReader;
-import net.beadsproject.beads.data.audiofile.AudioFileType;
-import net.beadsproject.beads.data.audiofile.AudioFileWriter;
-import net.sourceforge.jaad.spi.javasound.AACAudioFileReader;
+import net.beadsproject.beads.data.audiofile.*;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
@@ -26,39 +23,8 @@ public class Sample {
   // These are the classes that handle audio file IO
   private Class<? extends AudioFileReader> audioFileReaderClass = null;
   private Class<? extends AudioFileWriter> audioFileWriterClass = null;
-  private static Class<? extends AudioFileReader> defaultAudioFileReaderClass;
-  private static Class<? extends AudioFileWriter> defaultAudioFileWriterClass;
-
-  /*
-   * Try to set the defaultAudioFileReaderClass to JavaSoundAudioFile if available, and if not, use WavFileReaderWriter which
-   * should always be available in beads_main.
-   */
-  static {
-    try {
-      defaultAudioFileReaderClass = (Class<? extends AudioFileReader>) Class.forName("JavaSoundAudioFile");
-    } catch (ClassNotFoundException e) {
-      try {
-        defaultAudioFileReaderClass = (Class<? extends AudioFileReader>) Class.forName("WavFileReaderWriter");
-      } catch (ClassNotFoundException e2) {
-        defaultAudioFileReaderClass = null;
-      }
-    }
-  }
-
-  /*
-   * Set the defaultAudioFileWriterClass to WavFileReaderWriter which should always be available in beads_main.
-   */
-  static {
-    try {
-      defaultAudioFileWriterClass = (Class<? extends AudioFileWriter>) Class.forName("JavaSoundAudioFile");
-    } catch (ClassNotFoundException e) {
-      try {
-        defaultAudioFileWriterClass = (Class<? extends AudioFileWriter>) Class.forName("WavFileReaderWriter");
-      } catch (ClassNotFoundException e2) {
-        defaultAudioFileReaderClass = null;
-      }
-    }
-  }
+  private static Class<? extends AudioFileReader> defaultAudioFileReaderClass = JavaSoundAudioFile.class;
+  private static Class<? extends AudioFileWriter> defaultAudioFileWriterClass = JavaSoundAudioFile.class;
 
   /**
    * Instantiates a new writable sample with specified length and default
@@ -560,24 +526,17 @@ public class Sample {
     //In the first instance we can only use the file suffix as a clue to this, not the header.
     Class<? extends AudioFileReader> theRealAudioFileReaderClass = audioFileReaderClass == null ? defaultAudioFileReaderClass : audioFileReaderClass;
     if (file.endsWith(".wav") || file.endsWith(".WAV")) {
-      try {
-        theRealAudioFileReaderClass = (Class<? extends AudioFileReader>) Class.forName("WavFileReaderWriter");
-      } catch (ClassNotFoundException e) {
-        //worth continuing in case the default manages it.
-      }
-    }
-    if (file.endsWith(".m4a")) {
-      try {
-        theRealAudioFileReaderClass = (Class<? extends AudioFileReader>) Class.forName(AACAudioFileReader.class.getCanonicalName());
-      } catch (ClassNotFoundException e) {
-        //worth continuing in case the default manages it.
-      }
+      theRealAudioFileReaderClass = WavFileReaderWriter.class;//(Class < ?extends AudioFileReader>) Class.forName("WavFileReaderWriter");
     }
     AudioFileReader audioFileReader;
     try {
-      audioFileReader = theRealAudioFileReaderClass.getConstructor().newInstance();
-    } catch (Exception e1) {
-      throw new IOException("Sample: No AudioFileReader Class has been set and the default JavaSoundAudioFile Class cannot be found. Aborting write(). You may need to link to beads-io.jar.");
+      if (theRealAudioFileReaderClass.equals(JavaSoundAudioFile.class)) {
+        audioFileReader = new JavaSoundAudioFile();
+      } else {
+        audioFileReader = theRealAudioFileReaderClass.getConstructor().newInstance();
+      }
+    } catch (Exception e) {
+      throw new IOException("Sample: No AudioFileReader Class has been set and the default JavaSoundAudioFile Class cannot be found. Aborting write(). You may need to link to beads-io.jar.", e);
     }
     try {
       this.theSampleData = audioFileReader.readAudioFile(file);

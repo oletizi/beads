@@ -79,7 +79,7 @@ public class SampleManager {
         samples.put(ref, sample);
         if (verbose) System.out.println("Loaded " + fn);
       } catch (Exception e) {
-        //swallow exception
+        throw new RuntimeException(e);
       }
     }
     return sample;
