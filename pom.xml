@@ -14,15 +14,28 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>audiogen</id>
+            <url>scp://artpopmu@artpopmusic.com:/home4/artpopmu/www/audiogen/maven2/</url>
+        </repository>
+    </distributionManagement>
+
     <build>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ssh</artifactId>
+                <version>2.9</version>
+            </extension>
+        </extensions>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>2.3</version>
-                <executions>
-                    <!-- Run shade goal on package phase -->
+        <!--        <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-shade-plugin</artifactId>
+                        <version>2.3</version>
+                        <executions>
                     <execution>
                         <phase>package</phase>
                         <goals>
@@ -39,6 +52,8 @@
                 </executions>
             </plugin>
         </plugins>
+        -->
+
     </build>
     <repositories>
         <repository>
@@ -57,64 +72,82 @@
             <groupId>javazoom</groupId>
             <artifactId>jl</artifactId>
             <version>1.0.1</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/dependencies/jl1.0.1.jar</systemPath>
+            <!--
+                        <scope>system</scope>
+                        <systemPath>${project.basedir}/dependencies/jl/jl1.0.1.jar</systemPath>
+            -->
         </dependency>
         <dependency>
             <groupId>javazoom</groupId>
             <artifactId>mp3spi</artifactId>
             <version>1.9.14</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/dependencies/mp3spi1.9.4.jar</systemPath>
+            <!--
+                        <scope>system</scope>
+                        <systemPath>${project.basedir}/dependencies/mp3spi1.9.4.jar</systemPath>
+            -->
         </dependency>
         <dependency>
             <groupId>com.sun</groupId>
             <artifactId>jna</artifactId>
             <version>3.4.1</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/dependencies/jna.jar</systemPath>
+            <!--
+                        <scope>system</scope>
+                        <systemPath>${project.basedir}/dependencies/jna.jar</systemPath>
+            -->
         </dependency>
         <dependency>
             <groupId>org.jaudiolibs</groupId>
             <artifactId>jnajack</artifactId>
             <version>1.2.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/dependencies/org-jaudiolibs-jnajack.jar</systemPath>
+            <!--
+                        <scope>system</scope>
+                        <systemPath>${project.basedir}/dependencies/org-jaudiolibs-jnajack.jar</systemPath>
+            -->
         </dependency>
         <dependency>
             <groupId>org.jaudiolibs</groupId>
             <artifactId>audioservers</artifactId>
             <version>1.1.1</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/dependencies/org-jaudiolibs-audioservers.jar</systemPath>
+            <!--
+                        <scope>system</scope>
+                        <systemPath>${project.basedir}/dependencies/org-jaudiolibs-audioservers.jar</systemPath>
+            -->
         </dependency>
         <dependency>
             <groupId>org.jaudiolibs</groupId>
             <artifactId>audioservers-javasound</artifactId>
             <version>1.1.1</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/dependencies/org-jaudiolibs-audioservers-javasound.jar</systemPath>
+            <!--
+                        <scope>system</scope>
+                        <systemPath>${project.basedir}/dependencies/org-jaudiolibs-audioservers-javasound.jar</systemPath>
+            -->
         </dependency>
         <dependency>
             <groupId>org.jaudiolibs</groupId>
             <artifactId>audioservers-jack</artifactId>
             <version>1.1.1</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/dependencies/org-jaudiolibs-audioservers-jack.jar</systemPath>
+            <!--
+                        <scope>system</scope>
+                        <systemPath>${project.basedir}/dependencies/org-jaudiolibs-audioservers-jack.jar</systemPath>
+            -->
         </dependency>
         <dependency>
             <groupId>org.tritonus</groupId>
             <artifactId>tritonus-aos</artifactId>
             <version>0.3.6</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/dependencies/tritonus_aos-0.3.6.jar</systemPath>
+            <!--
+                        <scope>system</scope>
+                        <systemPath>${project.basedir}/dependencies/tritonus_aos-0.3.6.jar</systemPath>
+            -->
         </dependency>
         <dependency>
             <groupId>org.tritonus</groupId>
             <artifactId>tritonus-share</artifactId>
             <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/dependencies/tritonus_share.jar</systemPath>
+            <!--
+                        <scope>system</scope>
+                        <systemPath>${project.basedir}/dependencies/tritonus_share.jar</systemPath>
+            -->
         </dependency>
     </dependencies>
 </project>

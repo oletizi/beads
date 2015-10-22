@@ -76,7 +76,7 @@
         <jarjar jarfile="${libdir}/beads.jar">
             <fileset dir="${buildmain}"/>
             <fileset dir="${buildio}"/>
-            <zipfileset src="${depsdir}/jl1.0.1.jar"/>
+            <zipfileset src="../dependencies/jl/jl1.0.1.jar"/>
             <zipfileset src="${depsdir}/mp3spi1.9.4.jar"/>
             <zipfileset src="${depsdir}/tritonus_share.jar"/>
             <zipfileset src="${depsdir}/org-jaudiolibs-audioservers.jar"/>
@@ -140,7 +140,7 @@
             <fileset dir="${buildio}"/>
             <rule pattern="net.beadsproject.beads.*.*.**" result="beads.@3"/>
             <rule pattern="net.beadsproject.beads.*.**" result="beads.@2"/>
-            <zipfileset src="${depsdir}/jl1.0.1.jar"/>
+            <zipfileset src="../dependencies/jl/jl1.0.1.jar"/>
             <zipfileset src="${depsdir}/mp3spi1.9.4.jar"/>
             <zipfileset src="${depsdir}/tritonus_share.jar"/>
             <zipfileset src="${depsdir}/org-jaudiolibs-audioservers.jar"/>
