@@ -21,7 +21,7 @@ public class FeatureManager {
 
   private final static Map<Sample, FeatureSet> featureSets = new Hashtable<Sample, FeatureSet>();
 
-  private static boolean verbose = true;
+  private static boolean verbose = false;
 
   /**
    * Sets the FeatureSet for the given Sample.

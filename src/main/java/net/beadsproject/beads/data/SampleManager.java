@@ -35,7 +35,7 @@ public class SampleManager {
 
   private final static Set<SampleGroupListener> listeners = new HashSet<SampleGroupListener>();
 
-  private static boolean verbose = true;
+  private static boolean verbose = false;
 
   /**
    * Returns a new Sample from the given filename. If the Sample has already
