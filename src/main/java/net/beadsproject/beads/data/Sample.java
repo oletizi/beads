@@ -365,11 +365,7 @@ public class Sample {
     Class<? extends AudioFileWriter> theRealAudioFileWriterClass = audioFileWriterClass == null ? defaultAudioFileWriterClass : audioFileWriterClass;
     //JavaSound can only write 16-bit, but we can use WavFileReaderWriter for >16-bit wavs, hence always write wavs this way
     if (type == AudioFileType.WAV) {
-      try {
-        theRealAudioFileWriterClass = (Class<? extends AudioFileWriter>) Class.forName("WavFileReaderWriter");
-      } catch (ClassNotFoundException e) {
-        //worth continuing in case the default manages it.
-      }
+      theRealAudioFileWriterClass = WavFileReaderWriter.class;
     }
     if (theRealAudioFileWriterClass == null) {
       throw new IOException("Sample: No AudioFile Class has been set and the default JavaSoundAudioFile Class cannot be found. Aborting write(). You may need to link to beads-io.jar.");

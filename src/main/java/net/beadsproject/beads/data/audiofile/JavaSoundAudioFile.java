@@ -65,7 +65,7 @@ public class JavaSoundAudioFile implements AudioFileReader, AudioFileWriter {
    * See {@link AudioFileWriter#writeAudioFile}
    */
   public void writeAudioFile(float[][] data, String filename, AudioFileType type, SampleAudioFormat saf) throws IOException, OperationUnsupportedException {
-
+    System.out.println("Writing audio file of type: " + type);
     if (!this.getSupportedFileTypesForWriting().contains(type)) {
       throw new OperationUnsupportedException("Unsupported file type for writing: " + type);
     }
