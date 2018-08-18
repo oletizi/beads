@@ -1,129 +1,65 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>net.beadsproject</groupId>
+    <groupId>com.github.samgwise</groupId>
     <artifactId>beads</artifactId>
-    <version>1.0-custom-1.0</version>
-    <packaging>jar</packaging>
-
-    <name>beads</name>
-    <url>http://www.beadsproject.net/</url>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
-    <distributionManagement>
-        <repository>
-            <id>audiogen</id>
-            <url>scp://artpopmu@artpopmusic.com:/home4/artpopmu/www/audiogen/maven2/</url>
-        </repository>
-    </distributionManagement>
+    <version>1.01-SNAPSHOT</version>
 
     <build>
-        <extensions>
-            <extension>
-                <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-ssh</artifactId>
-                <version>2.9</version>
-            </extension>
-        </extensions>
-        <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+        <plugins>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.6</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.sun</groupId>
+                        <artifactId>tools</artifactId>
+                        <version>1.5.0</version>
+                        <scope>system</scope>
+                        <systemPath>${java.home}/../lib/tools.jar</systemPath>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <configuration>
+                            <target>
+                                <ant antfile="build.xml" target="default" />
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.3.1</version>
+                <executions>
+                    <execution>
+                        <id>install-library</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <groupId>net.beadsproject</groupId>
+                            <artifactId>beads</artifactId>
+                            <version>${project.version}</version>
+                            <file>build/beads/library/beads.jar</file>
+                            <packaging>jar</packaging>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
     </build>
-    <repositories>
-        <repository>
-            <id>audiogen</id>
-            <name>The audiogen custom repo.</name>
-            <url>http://audiogen.orionletizi.com/maven2/</url>
-        </repository>
-    </repositories>
-    <dependencies>
-        <dependency>
-            <groupId>net.sourceforge.jaad</groupId>
-            <artifactId>jaad</artifactId>
-            <version>0.8.4</version>
-        </dependency>
-        <dependency>
-            <groupId>javazoom</groupId>
-            <artifactId>jl</artifactId>
-            <version>1.0.1</version>
-            <!--
-                        <scope>system</scope>
-                        <systemPath>${project.basedir}/dependencies/jl/jl1.0.1.jar</systemPath>
-            -->
-        </dependency>
-        <dependency>
-            <groupId>javazoom</groupId>
-            <artifactId>mp3spi</artifactId>
-            <version>1.9.14</version>
-            <!--
-                        <scope>system</scope>
-                        <systemPath>${project.basedir}/dependencies/mp3spi1.9.4.jar</systemPath>
-            -->
-        </dependency>
-        <dependency>
-            <groupId>com.sun</groupId>
-            <artifactId>jna</artifactId>
-            <version>3.4.1</version>
-            <!--
-                        <scope>system</scope>
-                        <systemPath>${project.basedir}/dependencies/jna.jar</systemPath>
-            -->
-        </dependency>
-        <dependency>
-            <groupId>org.jaudiolibs</groupId>
-            <artifactId>jnajack</artifactId>
-            <version>1.2.0</version>
-            <!--
-                        <scope>system</scope>
-                        <systemPath>${project.basedir}/dependencies/org-jaudiolibs-jnajack.jar</systemPath>
-            -->
-        </dependency>
-        <dependency>
-            <groupId>org.jaudiolibs</groupId>
-            <artifactId>audioservers</artifactId>
-            <version>1.1.1</version>
-            <!--
-                        <scope>system</scope>
-                        <systemPath>${project.basedir}/dependencies/org-jaudiolibs-audioservers.jar</systemPath>
-            -->
-        </dependency>
-        <dependency>
-            <groupId>org.jaudiolibs</groupId>
-            <artifactId>audioservers-javasound</artifactId>
-            <version>1.1.1</version>
-            <!--
-                        <scope>system</scope>
-                        <systemPath>${project.basedir}/dependencies/org-jaudiolibs-audioservers-javasound.jar</systemPath>
-            -->
-        </dependency>
-        <dependency>
-            <groupId>org.jaudiolibs</groupId>
-            <artifactId>audioservers-jack</artifactId>
-            <version>1.1.1</version>
-            <!--
-                        <scope>system</scope>
-                        <systemPath>${project.basedir}/dependencies/org-jaudiolibs-audioservers-jack.jar</systemPath>
-            -->
-        </dependency>
-        <dependency>
-            <groupId>org.tritonus</groupId>
-            <artifactId>tritonus-aos</artifactId>
-            <version>0.3.6</version>
-            <!--
-                        <scope>system</scope>
-                        <systemPath>${project.basedir}/dependencies/tritonus_aos-0.3.6.jar</systemPath>
-            -->
-        </dependency>
-        <dependency>
-            <groupId>org.tritonus</groupId>
-            <artifactId>tritonus-share</artifactId>
-            <version>1.0</version>
-            <!--
-                        <scope>system</scope>
-                        <systemPath>${project.basedir}/dependencies/tritonus_share.jar</systemPath>
-            -->
-        </dependency>
-    </dependencies>
+
 </project>
